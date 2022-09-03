@@ -1,6 +1,13 @@
 from xmlrpc.client import MAXINT
 import math
 
+import csv
+with open('Data.csv', newline='') as csvfile:
+    readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    set1 = []
+for row in readfile1:
+    set1.append(row)
+
 class Sym():
     def _init_(self, cpos, cname):
         self.n = 0
