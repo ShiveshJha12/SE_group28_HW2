@@ -35,6 +35,7 @@ class Nums():
         self. lo = MAXINT
         self. hi = -MAXINT
         self.isSorted = True
+        self._has = {}
 
     def nums(self):
         if not self.isSorted:
