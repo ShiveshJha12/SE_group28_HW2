@@ -1,3 +1,32 @@
+from xmlrpc.client import MAXINT
+import math
+
+class Sym():
+    def _init_(self, cpos, cname):
+        self.n = 0
+        self.at = cpos
+        self.name = cname
+        self._has = {}
+
+    def add(self,x):
+        if x != '?':
+            self.n = self.n+1
+        else:
+            if x in self._has[x]:
+                self._has[x] += 1
+            else:        
+                self._has[x] = 1
+
+    def mid(self):
+        most = -1
+        mode = ''
+        for key, value in self._has.items():
+            if value > most:
+                mode, most = key, value
+        return mode
+
+## def div() to be written
+
 class Nums():
     def __init__(self, cpos, cname):
         self.n = 0
