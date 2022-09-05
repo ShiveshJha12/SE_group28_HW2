@@ -33,6 +33,14 @@ class Sym():
         return mode
 
 ## def div() to be written
+    def div(self):
+        def fun(p):
+            return p*math.log(p,2)
+        e = 0
+        for _, n in self._has.items():
+            if n>0:
+                e = e - fun(n/self.n)
+        return e
 
 class Nums():
     def __init__(self, cpos, cname):
