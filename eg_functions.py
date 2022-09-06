@@ -23,8 +23,8 @@ Nums = se_hw2.Nums
 class eg():
 
   def num():
-    num = Nums()
-    for x in range(100):
+    num = Nums(None,None)
+    for x in range(1,101):
       num.add(x)
     mid = num.mid()
     div = num.div()
@@ -34,9 +34,9 @@ class eg():
   def bignum():
     num = Nums(None,None)
     storage = 32
-    for i in range(1000):
+    for i in range(1,1001):
       num.add(i)
-    print(sorted(num._has.values()))
+    #print(sorted(num._has.values()))
     num.nums()
     return 32==len(num._has)
     
@@ -50,4 +50,5 @@ class eg():
     # oo({mid=mode, div=entropy})
     return mode=='a' and 1.37<=entropy and entropy<=1.38
 
-print(eg.bignum())
+print("Result of eg.num() test function : ",eg.num())
+print("Result of eg.bignum() test function : ",eg.bignum())
