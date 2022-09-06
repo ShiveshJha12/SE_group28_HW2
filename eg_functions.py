@@ -7,7 +7,8 @@ Sym = se_hw2.Sym
 Nums = se_hw2.Nums
 
 
-class eg:
+class eg():
+
   def num():
     num = Nums(None,None)
     for x in range(1,101):
