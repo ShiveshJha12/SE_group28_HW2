@@ -56,7 +56,8 @@ class Nums():
 
     def nums(self):
         if not self.isSorted:
-            self._has = sorted(self._has.items(), key=lambda x: x[1])
+            self._has = {k:v for k,v in sorted(self._has.items(), key=lambda x: x[1])}
+
             self.isSorted = True
         return self._has
 
@@ -73,19 +74,20 @@ class Nums():
             if pos:
                 self.isSorted = False
                 self._has[pos] = int(x)
-        ## to be written ahead
+
+    def per(self,t,p):
+        p = math.floor(((p or 0.5)* len(t))+ 0.5)
+        return t[max(1, min(len(t), p))]
 
     def div(self):
         a = self.nums()
-        a90 = a[int(math.ceil((a.len() * 90) / 100)) - 1]
-        a10 = a[int(math.ceil((a.len() * 10) / 100)) - 1]
-        return ((a90-a10/2.58))
+        a2 = list(a.values())
+        print(a2)
+        return (self.per(a2,0.9) - self.per(a2,0.1))/2.58
 
 
     def mid(self):
-        a = self.nums()
-        len = a.len()
-        return (a[len//2])
+        return self.per(list(self.nums().values()), 0.5)
 
 
 
