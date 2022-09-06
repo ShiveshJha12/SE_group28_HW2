@@ -1,3 +1,5 @@
+from operator import le
+import random
 from xmlrpc.client import MAXINT
 import math
 
@@ -5,8 +7,8 @@ import csv
 with open('Data.csv', newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
     set1 = []
-for row in readfile1:
-    set1.append(row)
+    for row in readfile1:
+        set1.append(row)
 
 class Sym():
     def _init_(self, cpos, cname):
@@ -56,13 +58,21 @@ class Nums():
         if not self.isSorted:
             self._has = sorted(self._has.items(), key=lambda x: x[1])
             self.isSorted = True
-        return self._has()
+        return self._has
 
-    def add(self, x, pos):
+    def add(self,x):
+        pos = None
         if x != '?':
             self.n = self.n+1
             self.lo = min(x, self.lo)
             self.hi = max(x, self.hi)
+            if len(self._has) < 32:
+                pos = 1 + len(self._has)
+            elif random.random()<32/self.n:
+                pos = random.randint(0,len(self._has))
+            if pos:
+                self.isSorted = False
+                self._has[pos] = int(x)
         ## to be written ahead
 
     def div(self):
