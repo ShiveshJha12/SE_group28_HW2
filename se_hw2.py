@@ -4,6 +4,31 @@ from xmlrpc.client import MAXINT
 import math
 
 import csv
+
+help="""CSV : summarized csv file
+(c) 2022 Tim Menzies <timm@ieee.org> BSD-2 license
+USAGE: lua seen.lua [OPTIONS]
+OPTIONS:
+ -e  --eg        start-up example                      = nothing
+ -d  --dump      on test failure, exit with stack dump = false
+ -f  --file      file with csv data                    = ../data/auto93.csv
+ -h  --help      show help                             = false
+ -n  --nums      number of nums to keep                = 512
+ -s  --seed      random number seed                    = 10019
+ -S  --seperator feild seperator                       = , """
+
+the = {}
+# the[x[0]] = coerce(x[1])
+the["eg"] = "nothing"
+the["dump"] = False
+the["file"] = "auto93.csv"
+the["help"] = help
+the["nums"] = 512
+the["seed"] = 10019
+the["seperator"] = ","
+
+
+
 with open('Data.csv', newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
     set1 = []
@@ -67,9 +92,9 @@ class Nums():
             self.n = self.n+1
             self.lo = min(x, self.lo)
             self.hi = max(x, self.hi)
-            if len(self._has) < 32:
+            if len(self._has) < the["nums"]:
                 pos = 1 + len(self._has)
-            elif random.random()<32/self.n:
+            elif random.random()<the["nums"]/self.n:
                 pos = random.randint(0,len(self._has))
             if pos:
                 self.isSorted = False
