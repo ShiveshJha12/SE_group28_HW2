@@ -1,21 +1,3 @@
-# def o(t):
-#     if isinstance(type(t), dict):
-#         return tostring(t)
-#     def show(k, v):
-#         if not tostring(k).find("^_"):
-#             v = o(v)
-#             return len(t)==0 and print(":%s %s", k, v) or tostring(v)
-#     u = {}
-#     for k, v in t.items():
-#         u[1+len(u)] = show(k, v)
-#     if len(t) == 0:
-#         u.sort()
-#     return "{" + " ".join(u) + "}"
-    
-# def oo(t):
-#     print(o(t))
-#     return t
-
 import random, re, sys, os
 from ast import Num
 import se_hw2
@@ -98,4 +80,3 @@ print("Result of eg.num() test function : ",eg.num())
 print("Result of eg.bignum() test function : ",eg.bignum())
 the = cli(the)
 # print("---->",runs(the["eg"]))
-
