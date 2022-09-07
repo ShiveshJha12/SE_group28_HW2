@@ -21,7 +21,7 @@ the = {}
 # the[x[0]] = coerce(x[1])
 the["eg"] = "nothing"
 the["dump"] = False
-the["file"] = "Data.csv"
+the["file"] = "data.csv"
 the["help"] = help
 the["nums"] = 512
 the["seed"] = 10019
@@ -29,7 +29,7 @@ the["seperator"] = ','
 
 
 
-with open('Data.csv', newline='') as csvfile:
+with open('data.csv', newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
     set1 = []
     for row in readfile1:
