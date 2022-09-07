@@ -21,11 +21,11 @@ the = {}
 # the[x[0]] = coerce(x[1])
 the["eg"] = "nothing"
 the["dump"] = False
-the["file"] = "auto93.csv"
+the["file"] = "Data.csv"
 the["help"] = help
 the["nums"] = 512
 the["seed"] = 10019
-the["seperator"] = ","
+the["seperator"] = ','
 
 
 
@@ -36,7 +36,7 @@ with open('Data.csv', newline='') as csvfile:
         set1.append(row)
 
 class Sym():
-    def _init_(self, cpos, cname):
+    def __init__(self, cpos, cname):
         self.n = 0
         self.at = cpos
         self.name = cname
@@ -45,8 +45,7 @@ class Sym():
     def add(self,x):
         if x != '?':
             self.n = self.n+1
-        else:
-            if x in self._has[x]:
+            if x in self._has:
                 self._has[x] += 1
             else:        
                 self._has[x] = 1
@@ -107,7 +106,6 @@ class Nums():
     def div(self):
         a = self.nums()
         a2 = list(a.values())
-        print(a2)
         return (self.per(a2,0.9) - self.per(a2,0.1))/2.58
 
 
