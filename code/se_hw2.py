@@ -111,3 +111,31 @@ class Nums():
 
     def mid(self):
         return self.per(list(self.nums().values()), 0.5)
+    
+
+class Cols():
+    def __init__(self, names):
+        self.names = names
+        self.all = []
+        self.x = []
+        self.y = []
+        self.klass = None
+    
+    def column(self):
+        for c in range(len(self.names)):
+            if (re.search('^[A-Z]', self.names[c])):
+                self.all.append(Nums(c, self.names[c])) 
+                col =  Nums(c, self.names[c])
+            else:
+                self.all.append(Sym(c, self.names[c]))
+                col = Sym(c, self.names[c])
+            if not re.search(':$', self.names[c]):
+                self.y.append(Nums(c, self.names[c])) if (re.search('[!+-]')) else self.x.append(Sym(c, self.names[c]))
+                if re.search('!$', self.names[c]):
+                    self.klass = col
+
+# class Row():
+#     def __init__(self, t):
+#         self.cells = t
+#         isEvaled = False
+#         cooked = copy(t)            ##copy function yet to be written in eg_functions.py
