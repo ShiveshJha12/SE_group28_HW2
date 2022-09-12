@@ -1,4 +1,5 @@
 import random, re, sys, os
+import csv
 from ast import Num
 import se_hw2
 the = se_hw2.the
@@ -42,6 +43,49 @@ class eg:
     print("----------------------------")
     print(":div    " + str(entropy) + "   :mid " + mode)
     return mode=='a' and 1.37<=entropy and entropy<=1.38
+
+  def csv():
+    with open('../data/data.csv', mode='r') as csv_file:
+      data = csv.reader(csv_file, delimiter=',')
+      count = 0
+      for row in data:
+        count += 1
+        if(count > 10):
+          break
+        print('{' + ', '.join(row) + '}')
+  
+  def data():
+    with open('../data/data.csv', mode='r') as csv_file:
+      data = csv.reader(csv_file, delimiter=',')
+      tmp = []
+      indexes = []
+      col_title = []
+      weight = []
+      row_count = 0
+      for row in data:
+          if(row_count == 0):
+            col_count = 0
+            for col_name in row:
+              col_count += 1
+              if(col_name.find('+') != -1 or col_name.find('-') != -1):
+                weight.append(1) if (col_name.find('+') != -1) else weight.append(-1)
+                col_title.append(col_name)
+                # get the indexes of columns to caculate
+                indexes.append(col_count)
+                # put lists of data to calculate
+                tmp.append([])
+          else:
+            for col in indexes:
+              # add data to tmp list
+              tmp[indexes.index(col)].append(float(row[col-1]))
+      for col in indexes:
+        print("{:at " + str(indexes[indexes.index(col)]) + 
+              " :hi " + str(max(tmp[indexes.index(col)])) + 
+              " :isSorted " + str(tmp[indexes.index(col)] == sorted(tmp[indexes.index(col)])) + 
+              " :lo " + str(min(tmp[indexes.index(col)])) + 
+              " :n " + str(len(tmp[indexes.index(col)])) + 
+              " :name " + str(col_title[indexes.index(col)]) + 
+              " :w " + str(weight[indexes.index(col)]) + "}")
 
 egd = {}
 def runs(k):
