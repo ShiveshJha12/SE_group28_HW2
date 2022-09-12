@@ -28,6 +28,28 @@ the["seed"] = 10019
 the["seperator"] = ','
 
 
+def check(s1):
+    if s1=="true":
+        s1 = True
+    if s1=="false":
+        s1 = False
+    return s1
+ 
+# to be implemented
+def coerce(s):
+    return 
+
+def csv_fun(file_path,func):
+    file = open(file_path, encoding='UTF8')
+    src = csv.reader(file, delimiter=' ')
+    sep = ','
+    for s in src:
+        t=[]
+        for s1 in row.split(sep):
+            t.append(coerce(s1))
+        func(t)
+
+
 
 with open('data.csv', newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
@@ -139,3 +161,14 @@ class Cols():
 #         self.cells = t
 #         isEvaled = False
 #         cooked = copy(t)            ##copy function yet to be written in eg_functions.py
+
+
+class Data():
+    def __init__(self,src):
+        self.cols = None
+        self.rows = {}
+        if(type(src) == str):
+            csv_fun(src,lambda row: Data.add(row))
+        else:
+            for k,v in (src.items() or {}):
+                Data.add(v)
