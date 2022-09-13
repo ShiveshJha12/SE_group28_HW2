@@ -1,30 +1,35 @@
 
+from copy import copy
 import random, re, sys, os
 import csv
-from ast import Num
+from tkinter.messagebox import RETRY
+from se_hw2 import coerce
 import se_hw2
 the = se_hw2.the
 help = se_hw2.help
 Sym = se_hw2.Sym
 Nums = se_hw2.Nums
-
-def o(t):
-  if(type(t) is not dict):
-    return str(t)
-  def show(k, v):
-    if not str(k).find("^_"):
-      v = o(v)
-      output_string = ":{} {}"
-      return output_string.format(k, v) if len(t) == 0 else str(v)
-  u = {}
-  for k, v in t.items():
-    u[1+len(u)] = show(k, v)
-  if len(t) == 0:
-    # sort dict u
-    u = u
-  return "{" + " ".join(u) + "}"
+Data = se_hw2.Data
+csv_fun = se_hw2.csv_fun
+from pprint import pprint
+# def o(t):
+#   if(type(t) is not dict):
+#     return str(t)
+#   def show(k, v):
+#     if not str(k).find("^_"):
+#       v = o(v)
+#       output_string = ":{} {}"
+#       return output_string.format(k, v) if len(t) == 0 else str(v)
+#   u = {}
+#   for k, v in t.items():
+#     u[1+len(u)] = show(k, v)
+#   if len(t) == 0:
+#     # sort dict u
+#     u = u
+#   return "{" + " ".join(u) + "}"
 
 class eg:
+  n = 0
   def num():
     num = Nums(None,None)
     for x in range(1,101):
@@ -61,22 +66,36 @@ class eg:
     return mode=='a' and 1.37<=entropy and entropy<=1.38
 
   def csv():
-    with open('../data/data.csv', mode='r') as csv_file:
-      data = csv.reader(csv_file, delimiter=',')
-      count = 0
-      for row in data:
-        count += 1
-        if(count > 10):
-          break
-        print('{' + ', '.join(row) + '}')
-  
-  def data():
+    print("--------------")
+    global n 
+    n = 0
+    def my_fun(t):
+      global n
+      if n < 10:
+        print(t)
+        n = n+1
+      else:
+        pass
+        
+    csv_fun("../data/auto93.csv", my_fun )
+    return True
+  #   with open('../data/data.csv', mode='r') as csv_file:
+  #     data = csv.reader(csv_file, delimiter=',')
+  #     count = 0
+  #     for row in data:
+  #       count += 1
+  #       if(count > 10):
+  #         break
+  #       print('{' + ', '.join(row) + '}')
 
+
+  def data():
+    print("--------------------------------------")
     # Data is constructor
     data = Data('../data/data.csv')
 
-    for _, col in (data.cols.y).items():
-      print(o(col))
+    for col in (data.cols.y):
+      print(vars(col))
     
     return True
 
@@ -115,17 +134,20 @@ class eg:
 
   def stats():
     # Data is constructor
+    print("------------------------------------")
     data = Data('../data/data.csv')
-
+    
     div = lambda col : col.div()
     mid = lambda col : col.mid()
-
-    print("xmid " + o(data.stats(2, data.cols.x, mid)))
-    print("xdiv " + o(data.stats(3, data.cols.x, div)))
-    print("ymid " + o(data.stats(2, data.cols.y, mid)))
-    print("ydiv " + o(data.stats(3, data.cols.y, div)))
+    print((data.stats(2, data.cols.x, mid)))
+    # print("xmid " + (data.stats(2, data.cols.x, mid)))
+    # print("xdiv " + (data.stats(3, data.cols.x, div)))
+    # print("ymid " + (data.stats(2, data.cols.y, mid)))
+    # print("ydiv " + (data.stats(3, data.cols.y, div)))
 
     return True
+  
+
 
 egd = {}
 def runs(k):
@@ -150,19 +172,14 @@ def runs(k):
     return out
 
 
-def coerce(s):
-    def fun(s1):
-        if s1 == "true": return True
-        if s1 == "false": return False
-        return s1
-    return int(s) or fun(re.match(s, "^\s*[.]*\s*"))
+
 
 def cli(t):
     for slot,v in (t.items()):
         v = str(v)
         for n,x in t.items():
             if x == "-" + (str(slot)[1:1]) or x == "--"+str(slot):
-                v = v == "false" and "true" or v == "true" and "false" or t[n+1] #or ??
+                v = v == "false" and "true" or v == "true" and "false" or sys.argv[n+1] #or ??
         t[slot] = coerce(v)
     if t["help"]: sys.exit(print("\n" + help +"\n"))
     return t
@@ -171,7 +188,8 @@ def cli(t):
 print("eg.num(): ",eg.num())
 print("eg.bignum(): ",eg.bignum())
 print("eg.sym():", eg.sym())
-# the = cli(the)
-# runs(the["eg"])
-
-
+print("eg.stats()", eg.stats())
+print("eg.data()", eg.data())
+print("eg.csv()", eg.csv())
+the = cli(the)
+runs(the["eg"])
