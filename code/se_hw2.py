@@ -216,7 +216,7 @@ class Data:
             # row = xs if xs != None else Row(xs)
             row = Row(xs)
             self.rows.append(xs if xs != None else Row(xs))
-            for todo in [self.cols.x]: 
+            for todo in [self.cols.x, self.cols.y]: 
                 for col in todo:
                     col.add(row.cells[col.at])
  
