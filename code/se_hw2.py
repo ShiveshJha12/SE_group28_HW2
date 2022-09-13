@@ -162,6 +162,11 @@ class Cols():
 #         isEvaled = False
 #         cooked = copy(t)            ##copy function yet to be written in eg_functions.py
 
+class Row():
+      def __init__(self, t):
+      self.cells = t
+      isEvaled = False
+      cooked = copy(t)            ##copy function yet to be written in eg_functions.py
 
 class Data():
     def __init__(self,src):
