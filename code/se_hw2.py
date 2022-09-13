@@ -1,9 +1,12 @@
+from configparser import NoOptionError
 from operator import le
 import random
+
 from xmlrpc.client import MAXINT
 import math
-
+import re
 import csv
+import copy
 
 help="""CSV : summarized csv file
 (c) 2022 Tim Menzies <timm@ieee.org> BSD-2 license
@@ -18,6 +21,9 @@ OPTIONS:
  -S  --seperator feild seperator                       = , """
 
 the = {}
+# help:gsub("\n [-][\S]+[\s]+[-][-]([\S]+)[^\n]+= ([\S]+)",
+#           function(k,x) the[k]=coerce(x) end)
+
 # the[x[0]] = coerce(x[1])
 the["eg"] = "nothing"
 the["dump"] = False
@@ -28,27 +34,50 @@ the["seed"] = 10019
 the["seperator"] = ','
 
 
-def check(s1):
-    if s1=="true":
-        s1 = True
-    if s1=="false":
-        s1 = False
-    return s1
- 
-# to be implemented
 def coerce(s):
-    return 
-
+    def fun(s1):
+        if s1 == "true": return True
+        if s1 == "false": return False
+        return s1
+    try:
+      return float(s)
+    except:
+        return s
+    #   return fun(re.match(s, "^\s*[.]*\s*"))
+ 
 def csv_fun(file_path,func):
-    file = open(file_path, encoding='UTF8')
-    src = csv.reader(file, delimiter=' ')
-    sep = ','
-    for s in src:
-        t=[]
-        for s1 in row.split(sep):
-            t.append(coerce(s1))
-        func(t)
+    with open(file_path, newline='') as csvfile:
+        readfile1 = csv.reader(csvfile, delimiter=',')
+        # print(readfile1) #recently commented
+        for row in readfile1:
+            t = []
+            for ele in row:
+                t.append(coerce(ele))
+                # print(">>>>>>>>>>>t:", t)
+            func(t)
 
+
+    # file = open(file_path, encoding='UTF8')
+    # src = csv.reader(file, delimiter=' ')
+    # sep = ','
+    # for s in src:
+    #     t=[]
+    #     for s1 in row: #change to io read
+    #         # t.append(coerce(s1))
+    #         t.append(s1)
+    #     func(t)
+
+
+
+# def csv_fun(file_path, fun):
+#     separator = the["seperator"]
+#     with open(file_path, 'r') as f:
+#         results = []
+#         for line in f:
+#                 entry = line.split(the["seperator"])
+#                 results.append(coerce(entry))
+#                 print(results)
+#     return fun(results)
 
 
 with open('data.csv', newline='') as csvfile:
@@ -57,7 +86,7 @@ with open('data.csv', newline='') as csvfile:
     for row in readfile1:
         set1.append(row)
 
-class Sym():
+class Sym:
     def __init__(self, cpos, cname):
         self.n = 0
         self.at = cpos
@@ -90,7 +119,7 @@ class Sym():
                 e = e - fun(n/self.n)
         return e
 
-class Nums():
+class Nums:
     def __init__(self, cpos, cname):
         self.n = 0
         self.at = cpos
@@ -135,45 +164,68 @@ class Nums():
         return self.per(list(self.nums().values()), 0.5)
     
 
-class Cols():
+class Cols:
     def __init__(self, names):
         self.names = names
         self.all = []
+        self.klass = None
         self.x = []
         self.y = []
-        self.klass = None
-    
-    def column(self):
-        for c in range(len(self.names)):
-            if (re.search('^[A-Z]', self.names[c])):
-                self.all.append(Nums(c, self.names[c])) 
-                col =  Nums(c, self.names[c])
+        for i in range(len(names)):
+            # print("!!!!!!!!!!!!!!", self.names)
+            if re.search('^[A-Z]', self.names[i]):
+                col = Nums(i,self.names[i])
+                self.all.append(Nums(i,self.names[i]))
             else:
-                self.all.append(Sym(c, self.names[c]))
-                col = Sym(c, self.names[c])
-            if not re.search(':$', self.names[c]):
-                self.y.append(Nums(c, self.names[c])) if (re.search('[!+-]')) else self.x.append(Sym(c, self.names[c]))
-                if re.search('!$', self.names[c]):
+                col = Sym(i,self.names[i])
+                self.all.append(Sym(i,self.names[i]))
+            if not re.search(':$', self.names[i]):
+                if re.search('[!+-]', self.names[i]):
+                    self.y.append(col)
+                else:
+                    self.x.append(col)
+                if re.search('[!$]', self.names[i]):
                     self.klass = col
+            
 
-# class Row():
-#     def __init__(self, t):
-#         self.cells = t
-#         isEvaled = False
-#         cooked = copy(t)            ##copy function yet to be written in eg_functions.py
+class Row:
+    def __init__(self, t):
+        self.cells = t
+        isEvaled = False
+        cooked = copy.deepcopy(t)            ##copy function yet to be written in eg_functions.py
 
-class Row():
-      def __init__(self, t):
-      self.cells = t
-      isEvaled = False
-      cooked = copy(t)            ##copy function yet to be written in eg_functions.py
-
-class Data():
+import numbers
+class Data:
+    # cols = None
     def __init__(self,src):
         self.cols = None
-        self.rows = {}
+        self.rows = []
         if(type(src) == str):
-            csv_fun(src,lambda row: Data.add(row))
+            csv_fun(src,lambda row: self.add(row))
         else:
-            for k,v in (src.items() or {}):
-                Data.add(v)
+            for row in (src):
+                # print("!!!!!!!!!!!!!", row)
+                self.add(row)
+    
+
+    def add (self, xs):
+        # print("!!XS!!!!", xs)
+        if self.cols == None:
+            self.cols = Cols(xs)
+        else:
+            # row = xs if xs != None else Row(xs)
+            row = Row(xs)
+            self.rows.append(xs if xs != None else Row(xs))
+            for todo in [self.cols.x]: 
+                for col in todo:
+                    col.add(row.cells[col.at])
+ 
+    def stats(self, places, showCols, fun):
+        showCols, fun = showCols or self.cols.y, fun or "mid"
+        t = {}
+        for col in showCols:
+            # print("------------------------------>>>>>>>",col)
+            v = fun(col)
+            v = round(v, places) if (isinstance(v, numbers.Number) ) else v
+            t[col.name] = v
+        return t
