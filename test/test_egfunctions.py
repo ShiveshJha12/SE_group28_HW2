@@ -9,15 +9,15 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-from src import se_hw2
+from src.se_hw2 import *
 
-coerce = se_hw2.coerce
-the = se_hw2.the
-help = se_hw2.help
-Sym = se_hw2.Sym
-Nums = se_hw2.Nums
-Data = se_hw2.Data
-csv_fun = se_hw2.csv_fun
+# coerce = se_hw2.coerce
+# the = se_hw2.the
+# help = se_hw2.help
+# Sym = se_hw2.Sym
+# Nums = se_hw2.Nums
+# Data = se_hw2.Data
+# csv_fun = se_hw2.csv_fun
 from pprint import pprint
 # def o(t):
 #   if(type(t) is not dict):
@@ -84,7 +84,7 @@ class eg:
       else:
         pass
         
-    csv_fun("../data/auto93.csv", my_fun )
+    csv_fun("./data/auto93.csv", my_fun )
     return True
   #   with open('../data/data.csv', mode='r') as csv_file:
   #     data = csv.reader(csv_file, delimiter=',')
@@ -99,7 +99,7 @@ class eg:
   def data():
     print("--------------------------------------")
     # Data is constructor
-    data = Data('../data/data.csv')
+    data = Data('./data/data.csv')
 
     for col in (data.cols.y):
       print(vars(col))
@@ -142,7 +142,7 @@ class eg:
   def stats():
     # Data is constructor
     print("------------------------------------")
-    data = Data('../data/data.csv')
+    data = Data('./data/data.csv')
     
     div = lambda col : col.div()
     mid = lambda col : col.mid()
