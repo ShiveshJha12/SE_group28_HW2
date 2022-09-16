@@ -202,5 +202,5 @@ def cli(t):
     return t
 
 eg.all()
-the = cli(the)
-runs(the["eg"])
+# the = cli(the)
+# runs(the["eg"])
