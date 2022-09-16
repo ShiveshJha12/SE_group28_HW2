@@ -37,7 +37,7 @@ from pprint import pprint
 
 class eg:
   n = 0
-  def num():
+  def test_num():
     num = Nums(None,None)
     for x in range(1,101):
       num.add(x)
@@ -48,7 +48,7 @@ class eg:
     print(mid,div)
     return (50<=mid and mid<=52) and (30.5<div and div<32)
 
-  def bignum():
+  def test_bignum():
     num = Nums(None,None)
     the["nums"] = 32
     for i in range(1,1001):
@@ -59,7 +59,7 @@ class eg:
     num.nums()
     return 32==len(num._has)
     
-  def sym():
+  def test_sym():
     sym = Sym(None, None)
     pairs = ['a', 'a', 'a', 'a', 'b', 'b', 'c']
     for x in pairs:
@@ -72,7 +72,7 @@ class eg:
     print(":div    " + str(entropy) + "   :mid " + mode)
     return mode=='a' and 1.37<=entropy and entropy<=1.38
 
-  def csv():
+  def test_csv():
     print("--------------")
     global n 
     n = 0
@@ -83,7 +83,6 @@ class eg:
         n = n+1
       else:
         pass
-        
     csv_fun("./data/auto93.csv", my_fun )
     return True
   #   with open('../data/data.csv', mode='r') as csv_file:
@@ -96,7 +95,7 @@ class eg:
   #       print('{' + ', '.join(row) + '}')
 
 
-  def data():
+  def test_data():
     print("--------------------------------------")
     # Data is constructor
     data = Data('./data/data.csv')
@@ -139,7 +138,7 @@ class eg:
     #           " :name " + str(col_title[indexes.index(col)]) + 
     #           " :w " + str(weight[indexes.index(col)]) + "}")
 
-  def stats():
+  def test_stats():
     # Data is constructor
     print("------------------------------------")
     data = Data('./data/data.csv')
@@ -154,13 +153,14 @@ class eg:
 
     return True
   
-  def all():
-    print("eg.num(): ",eg.num())
-    print("eg.bignum(): ",eg.bignum())
-    print("eg.sym():", eg.sym())
-    print("eg.stats()", eg.stats())
-    print("eg.data()", eg.data())
-    print("eg.csv()", eg.csv())
+  def test_all():
+    print("eg.num(): ",eg.test_num())
+    print("eg.bignum(): ",eg.test_bignum())
+    print("eg.sym():", eg.test_sym())
+    print("eg.stats()", eg.test_stats())
+    print("eg.data()", eg.test_data())
+    print("eg.csv()", eg.test_csv())
+    return eg.test_num and eg.test_bignum and eg.test_csv and eg.test_sym and eg.test_stats and eg.test_data and eg.test_csv
 
 
   
