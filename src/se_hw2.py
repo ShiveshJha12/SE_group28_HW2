@@ -31,7 +31,7 @@ the["file"] = "data.csv"
 the["help"] = help
 the["nums"] = 512
 the["seed"] = 10019
-the["seperator"] = ','
+the["seperator"] = ","
 
 script_dir = os.path.dirname(__file__)  # Script directory
 data_path = os.path.join(script_dir, '../data/data.csv')
