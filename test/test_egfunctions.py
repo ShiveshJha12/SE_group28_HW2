@@ -3,7 +3,7 @@ import random, sys, os
 #code to import package from another folder from StackOverflow: https://stackoverflow.com/a/69258641 
 import inspect
 import os
-import sys
+import sys, pytest
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parent_dir = os.path.dirname(current_dir)
@@ -42,29 +42,31 @@ from pprint import pprint
 
 
 n = 0
-def test_num():
+def test_num(do_print = 0):
   num = Nums(None,None)
   for x in range(1,101):
     num.add(x)
   mid = num.mid()
   div = num.div()
   #temp code till we get test engine to run perfectly
-  print("-----------------------------------")
-  print(mid,div)
+  if do_print != 0:
+    print("-----------------------------------")
+    print(mid,div)
   return (50<=mid and mid<=52) and (30.5<div and div<32)
 
-def test_bignum():
+def test_bignum(do_print = 0):
   num = Nums(None,None)
   the["nums"] = 32
   for i in range(1,1001):
     num.add(i)
   #temp code till we get test engine running
-  print("-----------------------------")
-  print(sorted(num._has.values()))
+  if do_print != 0:
+    print("-----------------------------")
+    print(sorted(num._has.values()))
   num.nums()
   return 32==len(num._has)
   
-def test_sym():
+def test_sym(do_print = 0):
   sym = Sym(None, None)
   pairs = ['a', 'a', 'a', 'a', 'b', 'b', 'c']
   for x in pairs:
@@ -73,18 +75,21 @@ def test_sym():
   entropy = (1000*entropy)//1/1000
   # oo({mid=mode, div=entropy})
   #temp printing code till we get test engine running
-  print("----------------------------")
-  print(":div    " + str(entropy) + "   :mid " + mode)
+  if do_print != 0:
+    print("----------------------------")
+    print(":div    " + str(entropy) + "   :mid " + mode)
   return mode=='a' and 1.37<=entropy and entropy<=1.38
 
-def test_csv():
+def test_csv(do_print = 0):
   print("--------------")
   global n 
   n = 0
   def my_fun(t):
     global n
     if n < 10:
-      print(t)
+      if do_print != 0:
+        
+        print(t)
       n = n+1
     else:
       pass
@@ -100,15 +105,14 @@ def test_csv():
 #       print('{' + ', '.join(row) + '}')
 
 
-def test_data():
-  print("--------------------------------------")
+def test_data(do_print = 0):
   # Data is constructor
   data = Data(test_csv_path)
 
   for col in (data.cols.y):
-    print(repr(col))
-    
-  
+    if do_print != 0:
+      print("--------------------------------------")
+      print(repr(col))
   return True
 
   ### use the following if o(col) doesn't work
@@ -144,22 +148,23 @@ def test_data():
   #           " :name " + str(col_title[indexes.index(col)]) + 
   #           " :w " + str(weight[indexes.index(col)]) + "}")
 
-def test_stats():
+def test_stats(do_print = 0):
   # Data is constructor
-  print("------------------------------------")
   data = Data(test_csv_path)
   
   div = lambda col : col.div()
   mid = lambda col : col.mid()
-  
-  print("xmid " + str(data.stats(2, data.cols.x, mid)))
-  print("xdiv " + str(data.stats(3, data.cols.x, div)))
-  print("ymid " + str(data.stats(2, data.cols.y, mid)))
-  print("ydiv " + str(data.stats(3, data.cols.y, div)))
+  if do_print != 0:
+    print("------------------------------------")
+    print("xmid " + str(data.stats(2, data.cols.x, mid)))
+    print("xdiv " + str(data.stats(3, data.cols.x, div)))
+    print("ymid " + str(data.stats(2, data.cols.y, mid)))
+    print("ydiv " + str(data.stats(3, data.cols.y, div)))
   return True
 
-def test_the():
-  print(the)
+def test_the(do_print = 0):
+  if do_print != 0 :
+    print(the)
   return True
 
 
@@ -198,7 +203,7 @@ def runs(k):
     else:
       try:
         egd[egd.index(k)]()
-        status, out = True, k()
+        status, out = True, k(1)
       except Exception as e:
         status, out = False, e
         print(e)
@@ -228,7 +233,10 @@ def cli(t):
     if t["help"]: sys.exit(print("\n" + help +"\n"))
     return t
 
-all()
-# the = cli(the)#to be updated for hw3
-# print(runs(the["eg"]))
-sys.exit(fails)#return with number of failed runs
+
+def main():
+  all()
+  print("tests failed:", fails)
+  os._exit(fails)
+if __name__ == '__main__':
+  main()
