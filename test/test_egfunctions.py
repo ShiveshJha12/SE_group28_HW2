@@ -9,6 +9,11 @@ current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfra
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
+
+script_dir = os.path.dirname(__file__)  # Script directory
+data_path = os.path.join(script_dir, '../data/data.csv')
+test_csv_path = os.path.join(script_dir, '../data/auto93.csv')
+
 from src.se_hw2 import *
 
 # coerce = se_hw2.coerce
@@ -83,7 +88,7 @@ def test_csv():
       n = n+1
     else:
       pass
-  csv_fun("../data/auto93.csv", my_fun )
+  csv_fun(test_csv_path, my_fun )
   return True
 #   with open('../data/data.csv', mode='r') as csv_file:
 #     data = csv.reader(csv_file, delimiter=',')
@@ -98,7 +103,7 @@ def test_csv():
 def test_data():
   print("--------------------------------------")
   # Data is constructor
-  data = Data('../data/data.csv')
+  data = Data(data_path)
 
   for col in (data.cols.y):
     print(vars(col))
@@ -141,7 +146,7 @@ def test_data():
 def test_stats():
   # Data is constructor
   print("------------------------------------")
-  data = Data('../data/data.csv')
+  data = Data(data_path)
   
   div = lambda col : col.div()
   mid = lambda col : col.mid()

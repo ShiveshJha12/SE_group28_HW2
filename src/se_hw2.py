@@ -1,6 +1,6 @@
 from configparser import NoOptionError
 from operator import le
-import random
+import random, os
 
 from xmlrpc.client import MAXINT
 import math
@@ -33,6 +33,8 @@ the["nums"] = 512
 the["seed"] = 10019
 the["seperator"] = ','
 
+script_dir = os.path.dirname(__file__)  # Script directory
+data_path = os.path.join(script_dir, '../data/data.csv')
 
 def coerce(s):
     def fun(s1):
@@ -80,7 +82,7 @@ def csv_fun(file_path,func):
 #     return fun(results)
 
 
-with open('../data/data.csv', newline='') as csvfile:
+with open(data_path, newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
     set1 = []
     for row in readfile1:
