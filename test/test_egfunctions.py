@@ -103,10 +103,11 @@ def test_csv():
 def test_data():
   print("--------------------------------------")
   # Data is constructor
-  data = Data(data_path)
+  data = Data(test_csv_path)
 
   for col in (data.cols.y):
-    print(vars(col))
+    print(repr(col))
+    
   
   return True
 
@@ -146,7 +147,7 @@ def test_data():
 def test_stats():
   # Data is constructor
   print("------------------------------------")
-  data = Data(data_path)
+  data = Data(test_csv_path)
   
   div = lambda col : col.div()
   mid = lambda col : col.mid()
@@ -155,42 +156,63 @@ def test_stats():
   print("xdiv " + str(data.stats(3, data.cols.x, div)))
   print("ymid " + str(data.stats(2, data.cols.y, mid)))
   print("ydiv " + str(data.stats(3, data.cols.y, div)))
-
   return True
 
+def test_the():
+  print(the)
+  return True
+
+
+global fails
+fails = 0
 def all():
-  print("num(): ",test_num())
-  print("bignum(): ",test_bignum())
-  print("sym():", test_sym())
-  print("stats()", test_stats())
-  print("data()", test_data())
-  print("csv()", test_csv())
-  return test_num and test_bignum and test_csv and test_sym and test_stats and test_data and test_csv
+  global fails
+  fun_list =  [test_num, test_bignum, test_csv, test_sym, test_stats, test_data, test_csv, test_the]
+  for fun in fun_list:
+    if runs(fun) != True:
+      fails = fails + 1
+  return True
+  # print("num(): ",test_num())
+  # print("bignum(): ",test_bignum())
+  # print("sym():", test_sym())
+  # print("stats()", test_stats())
+  # print("data()", test_data())
+  # print("csv()", test_csv())
+  # return test_num and test_bignum and test_csv and test_sym and test_stats and test_data and test_csv and test_the
 
 
   
 
 
-egd = {}
+egd =  [test_num, test_bignum, test_csv, test_sym, test_stats, test_data, test_csv, test_the]
 def runs(k):
-    # if not egd[k]: return
-    # if egd[k] == None: return ""
+    # if not k(): return
+    # if k not in egd: return
     random.seed(the["seed"])
     old = {}
-    for k,v in the.items():
-        old[k] = v
-    
+    for key,value in the.items():
+        old[key] = value
+    status = True
     if the["dump"] == True:
-        status, out = True, egd[k]()
+        status, out = True, k()
     else:
       try:
-        egd[k]
+        egd[egd.index(k)]()
+        status, out = True, k()
       except Exception as e:
         status, out = False, e
-    for k,v in old.items():
-        the[k] = v
-    msg = status and ((out == "true" and "PASS") or "FAIL") or "CRASH"
-    print("!!!!!!", msg, k, status)
+        print(e)
+    for key,value in old.items():
+        the[key] = value
+    # msg = status and ((out == True and "PASS") or "FAIL") or "CRASH"
+    if status == True:
+      if out == True:
+        msg = "PASS"
+      else:
+        msg = "FAIL"
+    else:
+      msg = "CRASH"
+    print("!!!!!!", msg, k.__name__, status)
     return out
 
 
@@ -207,5 +229,6 @@ def cli(t):
     return t
 
 all()
-# the = cli(the)
-print(runs(the["eg"]))
+# the = cli(the)#to be updated for hw3
+# print(runs(the["eg"]))
+sys.exit(fails)#return with number of failed runs

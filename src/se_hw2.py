@@ -21,14 +21,14 @@ OPTIONS:
  -S  --seperator feild seperator                       = , """
 
 the = {}
-# help:gsub("\n [-][\S]+[\s]+[-][-]([\S]+)[^\n]+= ([\S]+)",
-#           function(k,x) the[k]=coerce(x) end)
+# re.sub(help, "\n [-][\S]+[\s]+[-][-]([\S]+)[^\n]+= ([\S]+)",
+#           function(k,x) the[k]=coerce(x))
 
 # the[x[0]] = coerce(x[1])
 the["eg"] = "nothing"
 the["dump"] = False
 the["file"] = "data.csv"
-the["help"] = help
+the["help"] = False
 the["nums"] = 512
 the["seed"] = 10019
 the["seperator"] = ","
@@ -121,7 +121,14 @@ class Sym:
                 e = e - fun(n/self.n)
         return e
 
-class Nums:
+# To not print _has. Code from Discord A30
+class obj:
+    def __init__(i, **d): i.__dict__.update(d)
+    def __repr__(i) : return "{" + ', '.join(
+      [f":{k} {v}" for k, v in sorted(i.__dict__.items()) if
+                           k[0] != "_"]) + "}"
+
+class Nums(obj):
     def __init__(self, cpos, cname):
         self.n = 0
         self.at = cpos
