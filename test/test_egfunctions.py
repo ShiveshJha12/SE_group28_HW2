@@ -150,11 +150,11 @@ def test_stats():
   
   div = lambda col : col.div()
   mid = lambda col : col.mid()
-  print((data.stats(2, data.cols.x, mid)))
-  # print("xmid " + (data.stats(2, data.cols.x, mid)))
-  # print("xdiv " + (data.stats(3, data.cols.x, div)))
-  # print("ymid " + (data.stats(2, data.cols.y, mid)))
-  # print("ydiv " + (data.stats(3, data.cols.y, div)))
+  
+  print("xmid " + str(data.stats(2, data.cols.x, mid)))
+  print("xdiv " + str(data.stats(3, data.cols.x, div)))
+  print("ymid " + str(data.stats(2, data.cols.y, mid)))
+  print("ydiv " + str(data.stats(3, data.cols.y, div)))
 
   return True
 
@@ -208,4 +208,4 @@ def cli(t):
 
 all()
 # the = cli(the)
-# runs(the["eg"])
+print(runs(the["eg"]))
