@@ -35,132 +35,132 @@ from pprint import pprint
 #     u = u
 #   return "{" + " ".join(u) + "}"
 
-class eg:
-  n = 0
-  def test_num():
-    num = Nums(None,None)
-    for x in range(1,101):
-      num.add(x)
-    mid = num.mid()
-    div = num.div()
-    #temp code till we get test engine to run perfectly
-    print("-----------------------------------")
-    print(mid,div)
-    return (50<=mid and mid<=52) and (30.5<div and div<32)
 
-  def test_bignum():
-    num = Nums(None,None)
-    the["nums"] = 32
-    for i in range(1,1001):
-      num.add(i)
-    #temp code till we get test engine running
-    print("-----------------------------")
-    print(sorted(num._has.values()))
-    num.nums()
-    return 32==len(num._has)
-    
-  def test_sym():
-    sym = Sym(None, None)
-    pairs = ['a', 'a', 'a', 'a', 'b', 'b', 'c']
-    for x in pairs:
-      sym.add(x)
-    mode, entropy = sym.mid(), sym.div()
-    entropy = (1000*entropy)//1/1000
-    # oo({mid=mode, div=entropy})
-    #temp printing code till we get test engine running
-    print("----------------------------")
-    print(":div    " + str(entropy) + "   :mid " + mode)
-    return mode=='a' and 1.37<=entropy and entropy<=1.38
+n = 0
+def test_num():
+  num = Nums(None,None)
+  for x in range(1,101):
+    num.add(x)
+  mid = num.mid()
+  div = num.div()
+  #temp code till we get test engine to run perfectly
+  print("-----------------------------------")
+  print(mid,div)
+  return (50<=mid and mid<=52) and (30.5<div and div<32)
 
-  def test_csv():
-    print("--------------")
-    global n 
-    n = 0
-    def my_fun(t):
-      global n
-      if n < 10:
-        print(t)
-        n = n+1
-      else:
-        pass
-    csv_fun("./data/auto93.csv", my_fun )
-    return True
-  #   with open('../data/data.csv', mode='r') as csv_file:
-  #     data = csv.reader(csv_file, delimiter=',')
-  #     count = 0
-  #     for row in data:
-  #       count += 1
-  #       if(count > 10):
-  #         break
-  #       print('{' + ', '.join(row) + '}')
-
-
-  def test_data():
-    print("--------------------------------------")
-    # Data is constructor
-    data = Data('./data/data.csv')
-
-    for col in (data.cols.y):
-      print(vars(col))
-    
-    return True
-
-    ### use the following if o(col) doesn't work
-    # with open('../data/data.csv', mode='r') as csv_file:
-    #   data = csv.reader(csv_file, delimiter=',')
-    #   tmp = []
-    #   indexes = []
-    #   col_title = []
-    #   weight = []
-    #   row_count = 0
-    #   for row in data:
-    #       if(row_count == 0):
-    #         col_count = 0
-    #         for col_name in row:
-    #           col_count += 1
-    #           if(col_name.find('+') != -1 or col_name.find('-') != -1):
-    #             weight.append(1) if (col_name.find('+') != -1) else weight.append(-1)
-    #             col_title.append(col_name)
-    #             # get the indexes of columns to caculate
-    #             indexes.append(col_count)
-    #             # put lists of data to calculate
-    #             tmp.append([])
-    #       else:
-    #         for col in indexes:
-    #           # add data to tmp list
-    #           tmp[indexes.index(col)].append(float(row[col-1]))
-    #   for col in indexes:
-    #     print("{:at " + str(indexes[indexes.index(col)]) + 
-    #           " :hi " + str(max(tmp[indexes.index(col)])) + 
-    #           " :isSorted " + str(tmp[indexes.index(col)] == sorted(tmp[indexes.index(col)])) + 
-    #           " :lo " + str(min(tmp[indexes.index(col)])) + 
-    #           " :n " + str(len(tmp[indexes.index(col)])) + 
-    #           " :name " + str(col_title[indexes.index(col)]) + 
-    #           " :w " + str(weight[indexes.index(col)]) + "}")
-
-  def test_stats():
-    # Data is constructor
-    print("------------------------------------")
-    data = Data('./data/data.csv')
-    
-    div = lambda col : col.div()
-    mid = lambda col : col.mid()
-    print((data.stats(2, data.cols.x, mid)))
-    # print("xmid " + (data.stats(2, data.cols.x, mid)))
-    # print("xdiv " + (data.stats(3, data.cols.x, div)))
-    # print("ymid " + (data.stats(2, data.cols.y, mid)))
-    # print("ydiv " + (data.stats(3, data.cols.y, div)))
-
-    return True
+def test_bignum():
+  num = Nums(None,None)
+  the["nums"] = 32
+  for i in range(1,1001):
+    num.add(i)
+  #temp code till we get test engine running
+  print("-----------------------------")
+  print(sorted(num._has.values()))
+  num.nums()
+  return 32==len(num._has)
   
-  def test_all():
-    print("eg.num(): ",eg.test_num())
-    print("eg.bignum(): ",eg.test_bignum())
-    print("eg.sym():", eg.test_sym())
-    print("eg.stats()", eg.test_stats())
-    print("eg.data()", eg.test_data())
-    print("eg.csv()", eg.test_csv())
-    return eg.test_num and eg.test_bignum and eg.test_csv and eg.test_sym and eg.test_stats and eg.test_data and eg.test_csv
+def test_sym():
+  sym = Sym(None, None)
+  pairs = ['a', 'a', 'a', 'a', 'b', 'b', 'c']
+  for x in pairs:
+    sym.add(x)
+  mode, entropy = sym.mid(), sym.div()
+  entropy = (1000*entropy)//1/1000
+  # oo({mid=mode, div=entropy})
+  #temp printing code till we get test engine running
+  print("----------------------------")
+  print(":div    " + str(entropy) + "   :mid " + mode)
+  return mode=='a' and 1.37<=entropy and entropy<=1.38
+
+def test_csv():
+  print("--------------")
+  global n 
+  n = 0
+  def my_fun(t):
+    global n
+    if n < 10:
+      print(t)
+      n = n+1
+    else:
+      pass
+  csv_fun("../data/auto93.csv", my_fun )
+  return True
+#   with open('../data/data.csv', mode='r') as csv_file:
+#     data = csv.reader(csv_file, delimiter=',')
+#     count = 0
+#     for row in data:
+#       count += 1
+#       if(count > 10):
+#         break
+#       print('{' + ', '.join(row) + '}')
+
+
+def test_data():
+  print("--------------------------------------")
+  # Data is constructor
+  data = Data('../data/data.csv')
+
+  for col in (data.cols.y):
+    print(vars(col))
+  
+  return True
+
+  ### use the following if o(col) doesn't work
+  # with open('../data/data.csv', mode='r') as csv_file:
+  #   data = csv.reader(csv_file, delimiter=',')
+  #   tmp = []
+  #   indexes = []
+  #   col_title = []
+  #   weight = []
+  #   row_count = 0
+  #   for row in data:
+  #       if(row_count == 0):
+  #         col_count = 0
+  #         for col_name in row:
+  #           col_count += 1
+  #           if(col_name.find('+') != -1 or col_name.find('-') != -1):
+  #             weight.append(1) if (col_name.find('+') != -1) else weight.append(-1)
+  #             col_title.append(col_name)
+  #             # get the indexes of columns to caculate
+  #             indexes.append(col_count)
+  #             # put lists of data to calculate
+  #             tmp.append([])
+  #       else:
+  #         for col in indexes:
+  #           # add data to tmp list
+  #           tmp[indexes.index(col)].append(float(row[col-1]))
+  #   for col in indexes:
+  #     print("{:at " + str(indexes[indexes.index(col)]) + 
+  #           " :hi " + str(max(tmp[indexes.index(col)])) + 
+  #           " :isSorted " + str(tmp[indexes.index(col)] == sorted(tmp[indexes.index(col)])) + 
+  #           " :lo " + str(min(tmp[indexes.index(col)])) + 
+  #           " :n " + str(len(tmp[indexes.index(col)])) + 
+  #           " :name " + str(col_title[indexes.index(col)]) + 
+  #           " :w " + str(weight[indexes.index(col)]) + "}")
+
+def test_stats():
+  # Data is constructor
+  print("------------------------------------")
+  data = Data('../data/data.csv')
+  
+  div = lambda col : col.div()
+  mid = lambda col : col.mid()
+  print((data.stats(2, data.cols.x, mid)))
+  # print("xmid " + (data.stats(2, data.cols.x, mid)))
+  # print("xdiv " + (data.stats(3, data.cols.x, div)))
+  # print("ymid " + (data.stats(2, data.cols.y, mid)))
+  # print("ydiv " + (data.stats(3, data.cols.y, div)))
+
+  return True
+
+def all():
+  print("num(): ",test_num())
+  print("bignum(): ",test_bignum())
+  print("sym():", test_sym())
+  print("stats()", test_stats())
+  print("data()", test_data())
+  print("csv()", test_csv())
+  return test_num and test_bignum and test_csv and test_sym and test_stats and test_data and test_csv
 
 
   
@@ -201,6 +201,6 @@ def cli(t):
     if t["help"]: sys.exit(print("\n" + help +"\n"))
     return t
 
-eg.all()
+all()
 # the = cli(the)
 # runs(the["eg"])

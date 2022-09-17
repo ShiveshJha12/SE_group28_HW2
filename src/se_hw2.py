@@ -80,7 +80,7 @@ def csv_fun(file_path,func):
 #     return fun(results)
 
 
-with open('./data/data.csv', newline='') as csvfile:
+with open('../data/data.csv', newline='') as csvfile:
     readfile1 = csv.reader(csvfile, delimiter=' ', quotechar='|')
     set1 = []
     for row in readfile1:
