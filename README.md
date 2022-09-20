@@ -11,6 +11,8 @@ This repository contains homeworks 2-5 of group 28
         <img src="https://img.shields.io/github/license/ShiveshJha12/SE_group28_HW2" /></a>
 <a href="https://github.com/ShiveshJha12/SE_group28_HW2/actions/workflows/python-app.yml">
         <img src="https://github.com/ShiveshJha12/SE_group28_HW2/actions/workflows/python-app.yml/badge.svg"/></a>     
+        
+[![DOI](https://zenodo.org/badge/532298273.svg)](https://zenodo.org/badge/latestdoi/532298273)
 
 ## Requirements
 <a href="https://github.com/ShiveshJha12/SE_group28_HW2/blob/main/requirements.txt"><h4>REQUIREMENTS.txt</a> 
