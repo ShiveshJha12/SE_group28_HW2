@@ -14,6 +14,9 @@ This repository contains homeworks 2-5 of group 28
         
 [![DOI](https://zenodo.org/badge/532298273.svg)](https://zenodo.org/badge/latestdoi/532298273)
 
+## Documentation
+<a href = 'https://htmlpreview.github.io/?https://github.com/ShiveshJha12/SE_group28_HW2/blob/main/docs/_build/html/index.html'>Documentation Page</a>
+
 ## Requirements
 <a href="https://github.com/ShiveshJha12/SE_group28_HW2/blob/main/requirements.txt"><h4>REQUIREMENTS.txt</a> 
 ## Install
