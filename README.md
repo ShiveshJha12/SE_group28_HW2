@@ -13,10 +13,7 @@ This repository contains homeworks 2-5 of group 28
         <img src="https://github.com/ShiveshJha12/SE_group28_HW2/actions/workflows/python-app.yml/badge.svg"/></a>
 
 
-<a href="https://docs.python.org/3/"> 
-        <img src="https://img.shields.io/github/languages/top/ShiveshJha12/SE_group28_HW2/"></a>
-
-        
+[![GitHub top language](https://img.shields.io/github/languages/top/mithildani/se22-hw1-grp14)](https://docs.python.org/3)
 [![DOI](https://zenodo.org/badge/532298273.svg)](https://zenodo.org/badge/latestdoi/532298273)
 
 ## Documentation
