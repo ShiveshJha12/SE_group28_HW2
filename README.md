@@ -14,7 +14,7 @@ This repository contains homeworks 2-5 of group 28
 
 
 <a href="https://docs.python.org/3/"> 
-        <img src="https://img.shields.io/github/languages/top/ShiveshJha12/SE_group28_HW2/" /></a>
+        <img src="https://img.shields.io/github/languages/top/ShiveshJha12/SE_group28_HW2/"></a>
 
         
 [![DOI](https://zenodo.org/badge/532298273.svg)](https://zenodo.org/badge/latestdoi/532298273)
