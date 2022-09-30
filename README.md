@@ -14,7 +14,6 @@ This repository contains homeworks 2-5 of group 28
 
 [![Code Coverage](https://codecov.io/gh/ShiveshJha12/SE_group28_HW2/branch/main/graphs/badge.svg)](https://codecov.io/gh/ShiveshJha12/SE_group28_HW2/branch/main)
 
-[![GitHub top language](https://img.shields.io/github/languages/top/mithildani/se22-hw1-grp14)](https://docs.python.org/3)
 [![DOI](https://zenodo.org/badge/532298273.svg)](https://zenodo.org/badge/latestdoi/532298273)
 
 ## Documentation
